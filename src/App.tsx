@@ -1,23 +1,18 @@
-import React from "react";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import styled from "styled-components";
+import { Routes, Route } from "react-router-dom";
+import { Home } from "./pages/Home";
+import { Quiz } from "./pages/Quiz";
+import { Result } from "./pages/Result";
 
-import { configStore } from "./state/store";
-
-const { store, persistor } = configStore();
-
-const App = () => (
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <Title>Welcom to Test day at Kilo Health</Title>
-    </PersistGate>
-  </Provider>
-);
-
-const Title = styled.h1`
-  margin-top: 15rem;
-  text-align: center;
-`;
+const App = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="quiz" element={<Quiz />}>
+        <Route path=":id" element={<Quiz />} />
+      </Route>
+      <Route path="result" element={<Result />} />
+    </Routes>
+  );
+};
 
 export default App;
